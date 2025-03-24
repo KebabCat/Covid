@@ -11,12 +11,25 @@ function genFormHTML() {
     return fullhtml;
 }
 
+// Split Name
 
+function splitName(fullName) {
+    const lastName = fullName.trim().split(" ").pop();
+    console.log(lastName)
+    return lastName;
+}
 
 
 
 //FullPage
 function genFullPageHTML(patient, index) {
+    const name = patient[keys['name']]
+    console.log(name)
+    const lastName = splitName(name);
+    console.log(lastName);
+
+
+
     var address = '';
     if (patient[keys['address']] !== undefined) {
         address = patient[keys['address']];
@@ -39,13 +52,7 @@ function genFullPageHTML(patient, index) {
         ageHTML = ' (Under 18 - Check Vaccine Suitability)'
     }
 
-    JsBarcode("#barcode", "1234", {
-        format: "pharmacode",
-        lineColor: "#0aa",
-        width: 4,
-        height: 40,
-        displayValue: false
-      });
+
 
 
     firstdoseHTML = ``;
@@ -68,38 +75,55 @@ function genFullPageHTML(patient, index) {
     } else {
         doseHTML = ` First    |    Second`;
     }
- 
+
 
     return `<div class="vaccine-form"><h1>Vaccine Record Form</h1>
+
+
 
 
 
     <table class="table table-bordered">
     <tr>
         <td>Name</td>
-        <td><h4>` + patient[keys['name']] + `</h4></td>
+        <td>  
+          <h4>${patient[keys['name']]}</h4>
+                
+    
+        </td>
         <td rowspan=3 colspan=2 class="text-center">
-            <div class="qr-code" id="ptid-qr-` + index + `"></div>
+            <div class="qr-code" id="ptid-qr-${index}"></div>
         </td> 
         
     </tr>
 
-    <tr><svg id="barcode"></svg></tr>
+
+  
     <tr>
         
         <td>DOB</td>
-        <td>` + formatDate(patient[keys['dob']]) + ageHTML + `</td>
+        <td>${formatDate(patient[keys['dob']])}${ageHTML}</td>
         
     </tr>
-    <tr>
+    <tr>  
     <td>NHS No.</td>
-    <td>` + patient[keys['nhsno']] + `</td>
+    <td>${patient[keys['nhsno']]}</td>
     </tr>
     <tr>
-    <td>Address</td>
-    <td>` + address + `</td>
-        <td>GP Practice</td>
-        <td>` + RegisteredPracticeName + `</td>
+        <td>Barcode</td>
+        <td>  
+
+            <svg id="barcode-${index}"
+                jsbarcode-format="upc"
+                jsbarcode-textmargin="0"
+                jsbarcode-fontoptions="bold">
+            </svg>
+<script>JsBarcode("#barcode-${index}", "${lastName}", { width: 3, height: 40, format: "CODE39" });</script>
+
+
+        </td>
+            <td>GP Practice</td>
+            <td>${RegisteredPracticeName}</td>
     </tr>
 </table>
 
@@ -128,6 +152,7 @@ function genFullPageHTML(patient, index) {
 
     </table>
 
+    
     <table class="table table-bordered">
         <tr>
             <th colspan="2">Consent FOR COMPLETION IN THE EVENT OF AN IT OUTAGE</th>
@@ -136,10 +161,7 @@ function genFullPageHTML(patient, index) {
             <td>Consent given?</td>
             <td>Yes | No</td>
         </tr>
-        <tr>
-            <td>Consent Provided By:</td>
-            <td>Patient | LPA for Health | Court Appointed Deputy | Clinician Best Interests Decision (MCA)</td>
-        </tr>
+        
 <tr>
     </table>
 
@@ -148,19 +170,16 @@ function genFullPageHTML(patient, index) {
         <tr>
             <th colspan="4">Vaccination Details FOR COMPLETION IN THE EVENT OF AN IT OUTAGE</th>
         </tr>
-        <tr>
-        <td colspan="2">Dose Round</td>
-        <td colspan="2">` + doseHTML + `</td>
-        </tr>
+
         <tr>
             <td>Time of Vaccination (24hr)</td>
-            <td><h3>` + sessiontime + `</h3></td>
+            <td><h3>${sessiontime}</h3></td>
             <td>Date of Vaccination</td>
-            <td>` + sessiondate + `</td>
+            <td>${sessiondate}</td>
         </tr>
         <tr>
             <td colspan="2">Vaccine Brand and Batch Number</td>
-            <td colspan="2">` + vaccineType + ` ` + batchNumber + firstdoseHTML + `</td>
+            <td colspan="2">${vaccineType} ${batchNumber}${firstdoseHTML}</td>
         </tr>
         <tr>
             <td colspan="2">Administration Site</td>
