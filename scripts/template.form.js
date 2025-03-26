@@ -11,21 +11,29 @@ function genFormHTML() {
     return fullhtml;
 }
 
-// Split Name
+// Last Name In List
 
-function splitName(fullName) {
+function LastNameField(fullName) {
     const lastName = fullName.trim().split(" ").pop();
     console.log(lastName)
     return lastName;
 }
 
 
+// First Name In List comma separated
+
+function FirstNameField(fullName) {
+    const FirstName = fullName.trim().split(",");
+    console.log(FirstName[0])
+    return FirstName[0];
+}
+
 
 //FullPage
 function genFullPageHTML(patient, index) {
     const name = patient[keys['name']]
     console.log(name)
-    const lastName = splitName(name);
+    const lastName = FirstNameField(name);
     console.log(lastName);
 
 
@@ -135,17 +143,17 @@ function genFullPageHTML(patient, index) {
         <th>No</th>
     </tr>
     <tr>
-        <td>1. Are you feeling unwell today, for example, a high temperature or are antibiotics?</td>
+        <td>1. Are you feeling unwell today, for example, a high temperature, or on a course of antibiotics?</td>
         <td><div class="box"></div></td>
         <td><div class="box"></div></td>
     </tr>
     <tr>
-        <td>2. Do you suffer from severe allergies, or have have ever had a severe allergic reaction?</td>
+        <td>2. Do you suffer from severe allergies, or have you ever had a severe allergic reaction?</td>
         <td><div class="box"></div></td>
         <td><div class="box"></div></td>
     </tr>
     <tr>
-        <td>3. Have you had any severe side effects from previous Covid and/or Flu vaccinations?</td>
+        <td>3. Have you suffered any severe side effects from any previous vaccinations?</td>
         <td><div class="box"></div></td>
         <td><div class="box"></div></td>
     </tr>
