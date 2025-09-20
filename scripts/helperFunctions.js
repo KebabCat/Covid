@@ -75,10 +75,10 @@ function formatDate(dateString) {
 
     var out = fomattedDate.toLocaleDateString(
         'en-gb', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        }
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    }
     ).replace(/ /g, '-').replace("Sept", "Sep")
     return out;
 }
@@ -95,6 +95,24 @@ function getAge(dateString) {
         age--;
     }
     return age;
+}
+
+// Get the of the patient by using the campaign end date
+// The age of the patient on tnbhe lasdt day of the campaign
+
+function getCampaignAge(dateString) {
+    var dateString = formatDate(dateString);
+    // Use fixed end date set value here or in file
+    var campaignEndDate = new Date("1/21/26"); // US DATE FORMAT
+    // console.log("campaignEndDate" + campaignEndDate)
+    var birthDate = new Date(dateString);
+    var ageOncampaignEndDate = campaignEndDate.getFullYear() - birthDate.getFullYear();
+    var m = campaignEndDate.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && campaignEndDate.getDate() < birthDate.getDate())) {
+        ageOncampaignEndDate--;
+    }
+    console.log("ageOncampaignEndDate = " + ageOncampaignEndDate + " ")
+    return ageOncampaignEndDate;
 }
 
 //Sort list of patients alphabetically
@@ -124,12 +142,12 @@ function identifyCSVKeys(CSVArray, doseNumber) {
             nhsno_key = key;
         }
         if (lkey.includes('address')) {
-            if (lkey.includes('organisation')) {} else
-            if (lkey.includes('organization')) {} else
-            if (lkey.includes('practice')) {} else
-            if (lkey.includes('pcn')) {} else {
-                address_key = key;
-            }
+            if (lkey.includes('organisation')) { } else
+                if (lkey.includes('organization')) { } else
+                    if (lkey.includes('practice')) { } else
+                        if (lkey.includes('pcn')) { } else {
+                            address_key = key;
+                        }
         }
         if (lkey.includes('dob')) {
             dob_key = key;
@@ -138,14 +156,14 @@ function identifyCSVKeys(CSVArray, doseNumber) {
         }
         if (lkey.includes('name')) {
             //do not include if the column name has a "name" that is referencing something other than patient
-            if (lkey.includes('organisation')) {} else
-            if (lkey.includes('organization')) {} else
-            if (lkey.includes('practice')) {} else
-            if (lkey.includes('first')) {} else
-            if (lkey.includes('sur')) {} else
-            if (lkey.includes('pcn')) {} else {
-                name_key = key;
-            }
+            if (lkey.includes('organisation')) { } else
+                if (lkey.includes('organization')) { } else
+                    if (lkey.includes('practice')) { } else
+                        if (lkey.includes('first')) { } else
+                            if (lkey.includes('sur')) { } else
+                                if (lkey.includes('pcn')) { } else {
+                                    name_key = key;
+                                }
         }
         if (lkey.includes('first')) {
             if (lkey.includes('date')) {

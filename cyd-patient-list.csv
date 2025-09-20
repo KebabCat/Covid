@@ -1,2 +1,8 @@
 NhsNumber,Name,DateOfBirth,SessionDate,StartTime,RegisteredPracticeName,Address,VaccineDose
-889811349,Cydney Morgan,29/02/2020,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Over 50,21/01/1976,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Under 50,22/01/1976,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Over 18,21/01/2008,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Under 18,22/01/2008,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Low65 74,21/01/1961,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,High65 74,22/01/1951,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First
+889811349,Over 75,21/01/1951,20/01/2021,08:30,Test General Medical Practice,"123 Test Street, Bedford, BD12 3AD",First  

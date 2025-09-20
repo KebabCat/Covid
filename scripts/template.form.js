@@ -54,10 +54,25 @@ function genFullPageHTML(patient, index) {
     if (patient.RegisteredPracticeName !== undefined) {
         RegisteredPracticeName = patient.RegisteredPracticeName;
     }
-    age = getAge(patient[keys['dob']]);
+
+    //age = getAge(patient[keys['dob']]);
+
+    ageAtEndOfCampaign = getCampaignAge(patient[keys['dob']]);
+
     ageHTML = ""
-    if (age < 18) {
-        ageHTML = ' (Under 18 - Check Vaccine Suitability)'
+    box = ""
+    if (ageAtEndOfCampaign < 18) {
+        ageHTML = ageHTML + ' (Under 18 - Check Vaccine Suitability)'
+        box = "blue"
+    }
+    if (ageAtEndOfCampaign < 50) {
+        ageHTML = ageHTML + ' (Under 50)'
+    }
+    if ( (ageAtEndOfCampaign > 64) && (ageAtEndOfCampaign < 75) ) {
+        ageHTML = ' (64 -74 Years Old)'
+    }
+    if (ageAtEndOfCampaign >= 75) {
+        ageHTML = ' (Over 75)'
     }
 
 
